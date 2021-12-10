@@ -3,14 +3,14 @@
 // https://github.com/ethereum/EIPS/blob/master/EIPS/eip-20.md
 //------------------------------------------------------------------
 
-pragma solidity ^0.5.9;
+pragma solidity >=0.4.21 < 0.6.0;
 
 contract ERC20Interface {
     uint256 totSupply;
 
     function totalSupply() public view returns (uint);
-    function balanceOf() public view returns (uint balance);
-    function allowance() public view returns (uint remaining);
+    function balanceOf(address tokenOwner) public view returns (uint balance);
+    function allowance(address tokenOwner) public view returns (uint remaining);
     function transfer(address to, uint tokens) public returns (bool success);
     function approve(address spender, uint tokens) public returns (bool success);
     function transferFrom(address from, address to, uint tokens) public returns (bool success);

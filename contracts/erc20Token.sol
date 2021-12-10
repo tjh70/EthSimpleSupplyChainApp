@@ -9,7 +9,7 @@ contract ERC20Token is ERC20Interface {
     //define some values
     uint256 constant private MAX_UINT256 = 2**256-1; //maximum value of 256 bit uint
     mapping (address => uint256) public balances;    //mapp of addresses to balances             
-    mapping (address => mapping (address => uint256)) public allowed;  //map of sender address to map of reciever address to authorized tokens 
+    mapping (address => mapping (address => uint256)) public allowed;  //map of sender address to map of reciever addresses to authorized tokens 
                                                                     //sender has authorized to be transfferred?
     uint256 public totSupply;  //total Supply of the coing
     string public name;  //name of the token
@@ -32,7 +32,7 @@ contract ERC20Token is ERC20Interface {
 
     //function to transfer _value number of tokens from msg.sender to _to address
     function transfer(address _to, uint _value) public returns (bool success){
-         
+        
         return false;
     }
     
@@ -65,8 +65,8 @@ contract ERC20Token is ERC20Interface {
     function approve(address _spender, uint tokens) public returns (bool success){
         //likely something like below
         //probably need to check if tokenOwner is msg.sender and also that they have that amount of tokens
-        allowance[_spender] += tokens;
-        return true;
+        
+        return false;
     }
 
 

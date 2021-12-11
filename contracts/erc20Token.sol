@@ -40,7 +40,7 @@ contract ERC20Token is ERC20Interface {
         balances[msg.sender] -= _value;
         balances[msg.sender] += _value;
         
-        //
+        //emit is an event (sends message out to client)
         emit Transfer(_from, _to, _value); //solhint-disable-line indent, no-unused-vars
         
         //return success
@@ -59,12 +59,12 @@ contract ERC20Token is ERC20Interface {
         balances[_from] -= _tokens;
         balances[_to] += _tokens;
         
-        //
+        //not sure about this
         if (allowed < MAX_UINT256){
             allowed[_from][msg.sender] -= _tokens;
         }
 
-        //
+        //event emission to client
         emit Transfer(_from, _to, _value); //solhint-disable-line indent, no-unused-vars
         
         //return success

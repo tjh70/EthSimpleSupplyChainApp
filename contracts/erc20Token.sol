@@ -1,4 +1,5 @@
 //Implements EIP20 token standard:  https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
+//Note I followed a tutorial for this code and do not own it
 
 pragma solidity >=0.4.21 < 0.6.0;
 
@@ -18,6 +19,7 @@ contract ERC20Token is ERC20Interface {
 
     //create the new token and assign initial values including the initial amount
     constructor(
+        //parameters
         uint256 _initialAmount,
         string memory _tokenName,
         uint8 _decimalUnits,

@@ -1,5 +1,5 @@
 //Implements EIP20 token standard:  https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
-//Note I followed a tutorial for this code and do not own it
+//I followed a tutorial for this code and do not own it
 
 pragma solidity >=0.4.21 < 0.6.0;
 
@@ -54,14 +54,14 @@ contract ERC20Token is ERC20Interface {
         //max uint value
         uint256 allowed = allowed[_from][msg.sender];
         
-        //check from has the tokens and also msg.sender is allowed to transfer
-        require(balances[_from] >= _tokens && allowed >= _tokens, "Insufficient funds allowed for transfer from address " + _from);
+        //check from has the tokens and also msg.sender is allowed to transfer (second val is a return val)
+        require(balances[_from] >= _tokens && allowed >= _tokens, "Insufficient funds allowed for transfer from address");
         
         //add and subtract token vals
         balances[_from] -= _tokens;
         balances[_to] += _tokens;
         
-        //not sure about this
+        //checks that allowance isnt set to maximum
         if (allowed < MAX_UINT256){
             allowed[_from][msg.sender] -= _tokens;
         }

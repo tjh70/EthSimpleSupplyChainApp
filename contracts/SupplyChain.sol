@@ -88,12 +88,12 @@ contract SupplyChain{
 
         uint32 ownership_id = owner_id++;
 
-        if((keccak256(abi.encodePacked(oldOwner.participantType)) == keccak256(abi.encodePacked("Manuafacturer")) && keccak256(abi.encodePacked(newOwner.participantType)) == keccak256(abi.encodePacked("Supplier")))
-        || (keccak256(abi.encodePacked(oldOwner.participantType)) == keccak256(abi.encodePacked("Supplier")) && keccak256(abi.encodePacked(newOwner.participantType)) == keccak256(abi.encodePacked("Supplier")))
-        || (keccak256(abi.encodePacked(oldOwner.participantType)) == keccak256(abi.encodePacked("Supplier")) && keccak256(abi.encodePacked(newOwner.participantType)) == keccak256(abi.encodePacked("Consumer")))) {
+        if((keccak256(abi.encodePacked(oldOwner.participantType)) == keccak256(abi.encodePacked("Manuafacturer")) && keccak256(abi.encodePacked(nextOwner.participantType)) == keccak256(abi.encodePacked("Supplier")))
+        || (keccak256(abi.encodePacked(oldOwner.participantType)) == keccak256(abi.encodePacked("Supplier")) && keccak256(abi.encodePacked(nextOwner.participantType)) == keccak256(abi.encodePacked("Supplier")))
+        || (keccak256(abi.encodePacked(oldOwner.participantType)) == keccak256(abi.encodePacked("Supplier")) && keccak256(abi.encodePacked(nextOwner.participantType)) == keccak256(abi.encodePacked("Consumer")))) {
             ownerships[ownership_id].productId = _productId;
             ownerships[ownership_id].ownerId = _newOwnerId;
-            ownerships[ownership_id].productOwner = newOwner.participantAddress;
+            ownerships[ownership_id].productOwner = nextOwner.participantAddress;
             ownerships[ownership_id].traTimeStamp = uint32(now);
             products[_productId].productOwner = nextOwner.participantAddress;
             productTrack[_productId].push(ownership_id);
@@ -107,19 +107,24 @@ contract SupplyChain{
         return productTrack[_prodId];
     }
 
-    function getOwnership(uint32 _ownId) public view returns (ownership memory) {
-        return ownerships[_ownId];
+    function getOwnership(uint32 _ownId) public view returns (uint32, uint32, uint32, address) {
+        return (ownerships[_ownId].productId, ownerships[_ownId].ownerId, ownerships[_ownId].traTimeStamp, ownerships[_ownId].productOwner);
     }
 
     //simple and obviously NOT SECURE!!!!! 
     function authenticateParticipant(string memory _user, string memory _pass, string memory _uType, uint32 _uid ) public view returns (bool) {
         if(keccak256(abi.encodePacked(participants[_uid].userName)) == keccak256(abi.encodePacked(_user))
-        && keccak256(abi.encodePacked(participants[_uid].passWord)) == keccak256(abi.encodePacked(_pass))
+        && keccak256(abi.encodePacked(participants[_uid].password)) == keccak256(abi.encodePacked(_pass))
         && keccak256(abi.encodePacked(participants[_uid].participantType)) == keccak256(abi.encodePacked(_uType))
         ){
             return true;
         }
     }
-
-
 }
+
+    // struct ownership {
+    //     uint32 productId;
+    //     uint32 ownerId;
+    //     uint32 traTimeStamp;
+    //     address productOwner;
+    // }

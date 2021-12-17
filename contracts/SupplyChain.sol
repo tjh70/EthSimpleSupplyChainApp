@@ -41,6 +41,9 @@ contract SupplyChain{
     mapping(uint32 => uint32[]) public productTrack; //ownershps by by product id / movement tracking of a producc
     mapping(uint32 => participant) private participants; //map of participant ids to participants 
 
+    //events
+    event TransferOwnership(uint32 productId);
+
     function addParticipant(string memory _username, string memory _password, string memory _participantType, address _participantAddress) public returns (uint32) {
         uint32 userID = participant_id++;
         participants[userID].userName=_username;
@@ -118,5 +121,5 @@ contract SupplyChain{
         }
     }
 
-    
+
 }

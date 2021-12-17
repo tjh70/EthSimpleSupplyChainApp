@@ -17,7 +17,5 @@ contract ERC20Interface {
 
     event Transfer(address indexed from, address indexed to, uint tokens);
     event Approval(address indexed _owner, address indexed _spender, uint256 _value)
-    
-
 }
 

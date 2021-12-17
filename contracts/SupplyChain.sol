@@ -75,7 +75,7 @@ contract SupplyChain{
 
     modifier onlyOwner(uint32 _productId) {
         require(msg.sender == products[_productId].productOwner);
-        _;
+        _;  //sells solidity to continue on to function that modifier is applied to in the header
     }
 
     function getProduct(uint32 _product_id) public view returns (string memory, string memory, string memory, string memory, address, uint32, uint32) {

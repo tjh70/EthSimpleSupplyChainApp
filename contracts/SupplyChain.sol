@@ -67,7 +67,7 @@ contract SupplyChain{
             products[productID].serialNumber = _serialNumber;
             products[productID].productOwner = _productOwner;
             products[productID].cost = _cost;
-            products[productID].mfgTimeStamp = uint32(now);
+            products[productID].mfgTimeStamp = uint32(block.timestamp);
             
             return productID;
         }
@@ -94,7 +94,7 @@ contract SupplyChain{
             ownerships[ownership_id].productId = _productId;
             ownerships[ownership_id].ownerId = _newOwnerId;
             ownerships[ownership_id].productOwner = nextOwner.participantAddress;
-            ownerships[ownership_id].traTimeStamp = uint32(now);
+            ownerships[ownership_id].traTimeStamp = uint32(block.timestamp);
             products[_productId].productOwner = nextOwner.participantAddress;
             productTrack[_productId].push(ownership_id);
             emit TransferOwnership(_productId);
